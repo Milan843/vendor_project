@@ -1,0 +1,72 @@
+body {
+    min-height: 100%;
+  }
+  .stepperstep {
+    background: linear-gradient(grey, whitesmoke);
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+  }
+  .stepperstep > span {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-size: 15px;
+    color: #fff;
+    line-height: 25px;
+    text-align: center;
+  }
+  .stepperform {
+    background: whitesmoke;
+    padding: 20px;
+    justify-content: center;
+    box-shadow: 10px 10px 5px lightgrey;
+  }
+  
+  .stepperform > h2 {
+    text-shadow: 2px 2px 4px #000000;
+  }
+  
+  .navbar > a {
+    color: yellowgreen;
+    font-size: large;
+  }
+  .flex-row > span > a {
+    color: black;
+    float: right;
+    display: flex;
+  }
+  
+  .bg {
+    background-image: url("https://mdbootstrap.com/img/Photos/Others/images/91.jpg");
+    min-height: 100vh;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .innerdiv {
+    min-height: 100vh;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .col-md-4 {
+    padding: 1rem;
+    background-color: #33b5e5;
+    border: 2px solid #fff;
+    color: #fff;
+    text-align: center;
+  }
+  .proddetails {
+    width: 80%;
+  }
+  .edbtn {
+    width: 15%;
+  }
+  .edbtn > button {
+    margin: 5px;
+    background: transparent;
+    border: none;
+  }
