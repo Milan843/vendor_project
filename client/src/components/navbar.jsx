@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
+import Typography from '@material-ui/core/Typography';
+import {Link} from 'react-router-dom'
 
 //Navbar on the top of the page
 class NavBar extends Component{
@@ -14,7 +15,9 @@ class NavBar extends Component{
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant ="subtitle1" color="inherit">
-                       Product-Item Cart
+                       <Link to="/">Product-Item Cart</Link>
+                       &nbsp;&nbsp;&nbsp;
+                       <Link to="/dashboard">Dashboard</Link>
                     </Typography>
                 </Toolbar> 
             </AppBar>

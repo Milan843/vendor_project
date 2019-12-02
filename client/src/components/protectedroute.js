@@ -9,7 +9,9 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
       <Route
         {...rest}
         render={props => {
-          if (Cookie.get("token") !== "null") {
+          console.log(Cookie.get("token"));
+          
+          if (Cookie.get("token")!=='null') {
             return <Component {...props} />;
           } else {
             return (

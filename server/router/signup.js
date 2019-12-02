@@ -2,6 +2,7 @@ const express=require('express')
 const jwt = require("jwt-simple");
 let User=require('../models/model')
 const router=express.Router()
+const mailer=require('../mailer/nodemailer')
 
 //Signup router
 //update the User in the db
@@ -22,20 +23,12 @@ router.post('/user',async (req,res)=>{
             const secretKey="secret";
             let date=new Date();
             let time=date.getTime();
-            token = jwt.encode({ name,email,password, time }, secretKey);
+            token = jwt.encode({ name,email,password, time }, process.env.SECRET_KEY);
             //send the token for verification
-            console.log(`http://localhost:3300/verify/${token}`);
+            // mailer(`http://localhost:3400/verify/${token}`)
+            console.log(`http://localhost:3400/verify/${token}`);
             return res.send(`verify your account for ${email}`);
-            // userDetails.save((err,data)=>{
-            //     if(err){
-            //         res.send(err)
-            //     }
-            //     else{
-            //         res.send(data)
-            //         console.log(data)
-            //     }
-    
-            // })
+           
         }
     })
  
@@ -44,14 +37,15 @@ router.post('/user',async (req,res)=>{
  router.get('/verify/:token',async(req,res)=>{
     try{
     const secretKey="secret";
-    const decodedtoken = jwt.decode(req.params.token,secretKey );
+    const decodedtoken = jwt.decode(req.params.token,process.env.SECRET_KEY );
     const { name, email, password } = decodedtoken;
     console.log(userdetail.email)
    
     if(userdetail.email==email){
     await User.insertMany({ name, email, password });
     
-    res.send("email verified successfully");
+    // res.send("email verified successfully");
+    res.redirect('http://localhost:3000');
     }else{
         res.send("wrong token");
     }

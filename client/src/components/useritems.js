@@ -7,30 +7,41 @@ import { MDBListGroup, MDBListGroupItem, MDBContainer, MDBBtn } from "mdbreact";
 export class useritems extends Component {
   state = { mylist: [], productlist: [], show: "" };
 
-  componentDidMount = async () => {
-    const token = await Cookie.get("token");
-    const res = await Axios.get(`/useritems/${token}`);
-    const itemlist = res.data;
-    this.setState({ mylist: itemlist });
-  };
+  // componentDidMount = async () => {
+  //   const token = await Cookie.get("token");
+  //   const res = await Axios.get(`/useritems/${token}`);
+  //   const itemlist = res.data;
+    
+  //   this.setState({ mylist: itemlist });
+  // };
 
   proddelete= async(e)=>{
-    const res=await Axios.get(`/deleteproduct/${e}`);
-    console.log(res);
+    await Axios.get(`/deleteproduct/${e}`);
+  }
+
+  renderpage=async ()=>{
+    // const token = await Cookie.get("token");
+    const res = await Axios.get(`/useritems`);
+    const itemlist = res.data;
+    this.setState({ mylist: itemlist });
   }
 
   showproduct = () => {
+    
+    if(this.state.mylist!=='unvalid token'){
+      // console.log(this.state.mylist);
+      
     return this.state.mylist.map(item => {
       return (
         <React.Fragment>
           <MDBListGroupItem color="warning">
             <h2>
-              {Object.keys(item)}
-              <a href={`edit/${Object.keys(item)}`}>
+              {item.product_name}
+              <a href={`edit/${item._id}`}>
                 <MDBBtn color="secondary">DETAILS</MDBBtn>
               </a>
               <MDBBtn
-                value={Object.keys(item)}
+                value={item.product_name}
                 color="danger"
                 onClick={e => this.proddelete(e.target.value)}
               >
@@ -40,10 +51,15 @@ export class useritems extends Component {
           </MDBListGroupItem>
         </React.Fragment>
       );
-    });
+    })
+  }
+    else{
+      return <h1>x</h1>
+    }
   };
 
   render() {
+    {this.renderpage()}
     return (
       <React.Fragment>
         <MDBContainer>

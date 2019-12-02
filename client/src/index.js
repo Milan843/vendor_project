@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import NavBar from "./components/navbar";
+import Error from "./components/error";
 import DashBoard from "./components/dashboard";
 import Edit from "./components/edit";
 import "../src/css/index.css";
 import First from "./components/first";
-import { BrowserRouter as Router, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Redirect,Switch } from "react-router-dom";
 import Route from "react-router-dom/Route";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
@@ -15,6 +16,7 @@ import ProtectedRoute from "../src/components/protectedroute";
 import Axios from 'axios';
 
 const mytoken = Cookie.get("token");
+//sets the token to the headers
 Axios.defaults.headers.common["Authorization"] = `${mytoken}`;
 
 class App extends Component {
@@ -32,11 +34,12 @@ class App extends Component {
       <Router>
         <div className="bg">
           <NavBar />
+         <Switch>
           <Route path="/" exact strict component={First} />
           <ProtectedRoute path="/dashboard" exact component={DashBoard} />
-          <ProtectedRoute path="/edit/:product_id" exact component={Edit} />
-        {/* <Route path="*" exact component={Error}></Route> */}
-
+          <ProtectedRoute exact strict path="/edit/:product_id" exact component={Edit} />
+          <Route path="*"  component={Error}></Route>
+        </Switch>
         </div>
       </Router>
      

@@ -19,25 +19,39 @@ class Item extends Component {
       return (
         <React.Fragment>
           <MDBBtn
-            style={{ width:"100%" }}
+            style={{ width:"70%" }}
             key={_id}
             value={name}
             onClick={e => {
-              this.props.selectedItems(e.target.value);
+              this.props.selectedItems({[e.target.value]:1});
             }}
           >
             {name}
-          </MDBBtn><br/>
+          </MDBBtn>
+          <input type="number"  onChange={e=>this.props.ItemsQuantity({[name]:e.target.value})} min={1} style={{width:"20%"}}/>
+         
+          <br/>
         </React.Fragment>
       );
     });
   };
+
+  clickeditem=()=>{
+    return this.props.clickeditems.map((item)=>{
+      return (<div>
+        {item}
+      </div>)
+    })
+  }
 
   render() {
     return (
       <React.Fragment>
         <div style={{height:"150px", overflow:"auto"}}>
           {this.Itemlist()}
+        </div>
+        <div>
+          {this.clickeditem()}
         </div>
       </React.Fragment>
     );

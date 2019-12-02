@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import Axios from "axios";
 import Cookie from "js-cookie"
+import { withRouter } from "react-router";
 
 //The signin component
 //takes the email and password then hit request at backend
 class FormPage extends Component{
-  state = { email: "", password: "" };
+  state = { email: "", password: "" ,res:""};
   onFormSubmit = async prvt => {
     console.log(prvt)
     prvt.preventDefault();
@@ -18,8 +19,14 @@ class FormPage extends Component{
     //set the token in the cookies
     await Cookie.set("token",response.data.token)
 
-    console.log(Cookie.get('token'))
+    // console.log(Cookie.get('token')==undefined)
     // Cookie.remove('token');
+    if(Cookie.get('token')!=='undefined'){
+      this.props.history.push("/dashboard");
+    }else{
+      this.setState({ res: "email or password not valid"})
+
+    }
     };
     render() {
    
@@ -59,9 +66,10 @@ class FormPage extends Component{
           </form>
         </MDBCol>
       </MDBRow>
+      <h3>{this.state.res}</h3>
     </MDBContainer>
   );
     };
 };
 
-export default FormPage;
+export default withRouter(FormPage);

@@ -14,10 +14,10 @@ router.post('/signin',async (req,res)=>{
         
         const foundValue= await User.findOne({email:userEmail});
         if (foundValue.password==userPassword){
-            const secretKey="secret";
+            // const secretKey="secret";
             let date=new Date();
             let time=date.getTime();
-            token = jwt.encode({ email: userEmail, time }, secretKey);
+            token = jwt.encode({ email: userEmail, time }, process.env.SECRET_KEY);
             
             await User.updateOne({ email: userEmail }, { token: token });
             console.log(token)

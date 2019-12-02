@@ -3,3 +3,4 @@ let mongoose=require('mongoose')
 
 let mydb='mongodb://localhost/example';
 mongoose.connect(mydb,{ useNewUrlParser: true , useUnifiedTopology: true });
+mongoose.set('useCreateIndex', true);
